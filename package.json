@@ -1,0 +1,32 @@
+{
+  "name": "any2api-core",
+  "version": "0.0.1",
+  "author": "Johannes Wettinger <mail@jojow.de>",
+  "description": "Core of any2api",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/any2api/any2api-core"
+  },
+  "contributors": [
+    {
+      "name": "Johannes Wettinger",
+      "email": "mail@jojow.de"
+    }
+  ],
+  "license": "MIT",
+  "keywords": [
+    "any2api",
+    "core"
+  ],
+  "preferGlobal": false,
+  "dependencies": {
+    "lodash": "~2.4.1",
+    "debug": "~2.1.0",
+    "async": "~0.9.0",
+    "npm": "~2.1.8",
+    "fs-extra": "~0.12.0"
+  },
+  "engines": {
+    "node": ">= 0.10"
+  }
+}
