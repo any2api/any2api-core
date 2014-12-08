@@ -1,5 +1,1 @@
-module.exports = {
-  Scanners: require('./lib/Scanners'),
-  Invokers: require('./lib/Invokers'),
-  Generators: require('./lib/Generators')
-}
+module.exports = require('./lib/Core')();

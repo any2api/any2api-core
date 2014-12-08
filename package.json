@@ -1,6 +1,6 @@
 {
   "name": "any2api-core",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "author": "Johannes Wettinger <mail@jojow.de>",
   "description": "Core of any2api",
   "repository": {
@@ -21,7 +21,7 @@
   "preferGlobal": false,
   "dependencies": {
     "lodash": "~2.4.1",
-    "underscore.string": "~2.3.3",
+    "string": "~2.2.0",
     "debug": "~2.1.0",
     "async": "~0.9.0",
     "npm": "~2.1.8",
