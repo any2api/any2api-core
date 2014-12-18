@@ -2,13 +2,15 @@
 
 <%= description %>
 
+
+
 ## Run
 
 There are three option to run <%= title %>:
 
 
 
-### 1. Run directly
+### A. Run directly
 
 You need to have Node.js installed to run:
 
@@ -17,7 +19,7 @@ You need to have Node.js installed to run:
 
 
 
-### 2. Run in Docker container
+### B. Run in Docker container
 
 You need to have Docker installed to run:
 
@@ -26,7 +28,7 @@ You need to have Docker installed to run:
 
 
 
-### 3. Run using Vagrant
+### C. Run using Vagrant
 
 You need to have Vagrant installed to run:
 
@@ -36,7 +38,7 @@ You need to have Vagrant installed to run:
 
 ## Access
 
-The endpoint(s) to access the API are:
+Use the following endpoint(s) to access the API:
 
 <% _.forEach(ports, function(port) { %>    http://{HOST}:<%= port %>
 <% }); %>
