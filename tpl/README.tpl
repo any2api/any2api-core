@@ -6,7 +6,7 @@
 
 ## Run
 
-There are three option to run <%= title %>:
+There are three options to run <%= title %>:
 
 
 
