@@ -64,6 +64,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   else
     config.vm.provision :shell do |s|
       s.inline = <<-EOT
+        export FOREVER_ROOT="#{IMPL_DIR}/.forever"
+        export FOREVER_VERSION="0.15.1"
+
         sudo apt-get install -y build-essential curl git libssl-dev man
 
         git clone https://github.com/creationix/nvm.git ~/.nvm && cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`
@@ -73,14 +76,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         nvm install 0.10
         nvm alias default 0.10
 
-        npm install forever -g
+        npm install forever@$FOREVER_VERSION -g
 
         cd #{IMPL_DIR}
 
         npm run prepare-runtime
 
-        #forever -c "npm start" -l ./forever.log -o ./out.log -e ./err.log .
-        forever start -c "npm start" -l ./forever.log -o ./out.log -e ./err.log .
+        #forever -a -c "npm start" -l forever.log -o out.log -e err.log #{IMPL_DIR}
+        forever start -a -c "npm start" -l forever.log -o out.log -e err.log #{IMPL_DIR}
       EOT
       s.privileged = false
     end
