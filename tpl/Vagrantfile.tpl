@@ -73,8 +73,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         echo "source ~/.nvm/nvm.sh" >> ~/.profile
         source ~/.profile
 
-        nvm install 0.10
-        nvm alias default 0.10
+        nvm install 4
+        nvm alias default 4
 
         npm install forever@$FOREVER_VERSION -g
 
