@@ -14,7 +14,9 @@ ENV PM2_WEBSHELL_PASSWORD root
 <% if (baseRun) { %>RUN <%= baseRun %> <% } %>
 
 RUN npm install npm@$NPM_VERSION -g
-RUN npm install pm2@$PM2_VERSION -g
+
+RUN npm install pm2@$PM2_VERSION -g && \
+    pm2 install pm2-webshell
 
 #RUN npm install forever@$FOREVER_VERSION -g
 
