@@ -24,7 +24,7 @@ ADD . $IMPL_DIR/
 WORKDIR $IMPL_DIR
 RUN npm run prepare-runtime
 
-EXPOSE $PM2_WEBSHELL_PORT
+#EXPOSE $PM2_WEBSHELL_PORT
 
 <% _.forEach(ports, function(port) { %>
 EXPOSE <%= port %>
