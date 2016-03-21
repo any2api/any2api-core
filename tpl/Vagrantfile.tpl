@@ -64,8 +64,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   else
     config.vm.provision :shell do |s|
       s.inline = <<-EOT
-        export FOREVER_ROOT="#{IMPL_DIR}/.forever"
-        export FOREVER_VERSION="0.15.1"
+        export NPM_VERSION="3"
+        export PM2_VERSION="1"
+        #export FOREVER_ROOT="#{IMPL_DIR}/.forever"
+        #export FOREVER_VERSION="0.15.1"
 
         sudo apt-get install -y build-essential curl git libssl-dev man
 
@@ -76,14 +78,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         nvm install 4
         nvm alias default 4
 
-        npm install forever@$FOREVER_VERSION -g
+        npm install npm@$NPM_VERSION -g
+        npm install pm2@$PM2_VERSION -g
+        #npm install forever@$FOREVER_VERSION -g
 
         cd #{IMPL_DIR}
 
         npm run prepare-runtime
 
         #forever -a -c "npm start" -l forever.log -o out.log -e err.log #{IMPL_DIR}
-        forever start -a -c "npm start" -l forever.log -o out.log -e err.log #{IMPL_DIR}
+        #forever start -a -c "npm start" -l forever.log -o out.log -e err.log #{IMPL_DIR}
+        pm2 start npm --name "api" -- run start
       EOT
       s.privileged = false
     end
