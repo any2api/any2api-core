@@ -5,7 +5,7 @@ ENV API_DIR /api
 ENV NPM_VERSION 3
 
 ENV PM2_VERSION 1
-ENV PM2_HOME $API_DIR/.pm2
+#ENV PM2_HOME $API_DIR/.pm2
 
 ENV PM2_WEBSHELL_PORT 4000
 ENV PM2_WEBSHELL_USERNAME root
@@ -37,8 +37,5 @@ EXPOSE <%= port %>
 #CMD npm start
 #CMD forever -a -c "npm start" -l forever.log -o out.log -e err.log $API_DIR
 
-CMD pm2 set pm2-webshell:port $PM2_WEBSHELL_PORT && \
-    pm2 set pm2-webshell:username $PM2_WEBSHELL_USERNAME && \
-    pm2 set pm2-webshell:password $PM2_WEBSHELL_PASSWORD && \
-    \
+CMD pm2 set pm2-webshell:port $PM2_WEBSHELL_PORT pm2-webshell:username $PM2_WEBSHELL_USERNAME pm2-webshell:password $PM2_WEBSHELL_PASSWORD && \
     pm2 start npm --no-daemon --name "api" -- run start

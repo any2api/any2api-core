@@ -67,7 +67,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         export NPM_VERSION="3"
 
         export PM2_VERSION="1"
-        export PM2_HOME="#{API_DIR}/.pm2"
+        #export PM2_HOME="#{API_DIR}/.pm2"
 
         #export FOREVER_ROOT="#{API_DIR}/.forever"
         #export FOREVER_VERSION="0.15.1"
