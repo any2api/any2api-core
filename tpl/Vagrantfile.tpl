@@ -1,6 +1,6 @@
 VAGRANTFILE_API_VERSION = "2"
 
-IMPL_DIR = "/home/vagrant/impl"
+API_DIR = "/home/vagrant/api"
 
 <% _.forEach(ports, function(port) { %>
 if ENV['PORT_<%= port %>_MAPPING'].nil? 
@@ -49,24 +49,27 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
       ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-      mkdir -p #{IMPL_DIR}
+      mkdir -p #{API_DIR}
 
-      cp -a /vagrant/* #{IMPL_DIR}/
+      cp -a /vagrant/* #{API_DIR}/
     EOT
     s.privileged = false
   end
 
   if ENV['USE_DOCKER'] == "true" || ENV['USE_DOCKER'] == "yes"
     config.vm.provision "docker" do |d|
-      d.build_image IMPL_DIR, args: "-t impl"
-      d.run "impl", args: "<% _.forEach(ports, function(port) { %> -p #{PORT_<%= port %>_MAPPING}:<%= port %><% }); %>"
+      d.build_image API_DIR, args: "-t api"
+      d.run "api", args: "<% _.forEach(ports, function(port) { %> -p #{PORT_<%= port %>_MAPPING}:<%= port %><% }); %>"
     end
   else
     config.vm.provision :shell do |s|
       s.inline = <<-EOT
         export NPM_VERSION="3"
+
         export PM2_VERSION="1"
-        #export FOREVER_ROOT="#{IMPL_DIR}/.forever"
+        export PM2_HOME="#{API_DIR}/.pm2"
+
+        #export FOREVER_ROOT="#{API_DIR}/.forever"
         #export FOREVER_VERSION="0.15.1"
 
         sudo apt-get install -y build-essential curl git libssl-dev man
@@ -82,12 +85,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         npm install pm2@$PM2_VERSION -g
         #npm install forever@$FOREVER_VERSION -g
 
-        cd #{IMPL_DIR}
+        cd #{API_DIR}
 
         npm run prepare-runtime
 
-        #forever -a -c "npm start" -l forever.log -o out.log -e err.log #{IMPL_DIR}
-        #forever start -a -c "npm start" -l forever.log -o out.log -e err.log #{IMPL_DIR}
+        #forever -a -c "npm start" -l forever.log -o out.log -e err.log #{API_DIR}
+        #forever start -a -c "npm start" -l forever.log -o out.log -e err.log #{API_DIR}
         pm2 start npm --name "api" -- run start
       EOT
       s.privileged = false
