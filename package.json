@@ -1,6 +1,6 @@
 {
   "name": "any2api-core",
-  "version": "0.2.11",
+  "version": "0.2.12",
   "author": "Johannes Wettinger <mail@jojow.de>",
   "description": "Core of any2api",
   "repository": {
